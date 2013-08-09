@@ -48,7 +48,7 @@
    * @param  {Function} cb      Callback to apply upon completion
    * @return {[type]}           [description]
    */
-  EndPool.prototype.listenForEnd = function (element, pool, cb) {
+  EndPool.prototype.listenForEndOf = function (element, pool, cb) {
     
     var poolCount = 1, // Start at 1 and count up
         end = this.endEvent, // Shorthand lookup of event name
@@ -109,14 +109,14 @@
    * @param  {Function} cb      Callback to apply upon completion
    * @return {[type]}         [description]
    */
-  EndPool.prototype.listenForAll = function (items, pool, cb) {
+  EndPool.prototype.listenForEndOfAll = function (items, pool, cb) {
 
     // Count of items that have reported back as finished
     var itemsReported = 0,
         reportBack;
 
     /**
-     * Callback assigned to each instance of `listenForEnd`
+     * Callback assigned to each instance of `listenForEndOf`
      * @return {[type]} [description]
      */
     reportBack = function () {
@@ -127,12 +127,12 @@
     };
 
     /**
-     * Iterate over items passed in and listenForEnd on each
+     * Iterate over items passed in and listenForEndOf on each
      * @param  {[type]} el [description]
      * @return {[type]}    [description]
      */
     [].forEach.call(items, function (el) {
-      this.listenForEnd(el, pool, reportBack);
+      this.listenForEndOf(el, pool, reportBack);
     }, this);
   };
 
