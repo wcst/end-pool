@@ -1,6 +1,6 @@
 /* jshint browser: true */
 /**
- * EndPool 
+ * EndPool – https://github.com/wcst/end-pool
  * v0.0.1
  *
  * Listen for collection of css transitions to report as finished 
