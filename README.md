@@ -42,8 +42,10 @@ _Note:_ This is a work in progress.
   //
   endPool.listenForEndOf(shaker, 3, function () {
     // .shaker has finished its 3 transitions
-    // NOTE: the context passed back to the callback is the element itself
-    //      so you can do something like: this.innerHTML = 'done!'; (although I don't know why you would)
+    // NOTE: The callback is executed in the context of the element itself
+    //      so you can do something like: 
+    //          this.innerHTML = 'done!';
+    //      (although I don't know why you would)
   });
 
   // Listen for all transitions to finish on all items
