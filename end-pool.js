@@ -46,6 +46,7 @@
    * @param  {Element}  element DOM Node
    * @param  {Number}   pool    Number of transitions to listen for
    * @param  {Function} cb      Callback to apply upon completion
+   * @param {Object}    ctxt Optional context to invoke callback as
    * @return {[type]}           [description]
    */
   EndPool.prototype.listenForEndOf = function (element, pool, cb, ctxt) {
@@ -112,6 +113,7 @@
    * @param  {Array}   items    Set of DOM elements
    * @param  {Number}   pool    Number of transitions to listen for (per item)
    * @param  {Function} cb      Callback to apply upon completion
+   * @param {Object} ctxt Optional context to invoke callback as 
    * @return {[type]}         [description]
    */
   EndPool.prototype.listenForEndOfAll = function (items, pool, cb, ctxt) {
