@@ -42,7 +42,9 @@ _Note:_ This is a work in progress.
   //
   endPool.listenForEndOf(shaker, 3, function () {
     // .shaker has finished its 3 transitions
-    // NOTE: The callback is executed in the context of the element itself
+    //
+    // NOTE: The callback is executed in the context of the element itself unless a specific context is defined as the 4th arugment to the listenForEndOf method.
+    //
     //      so you can do something like: 
     //          this.innerHTML = 'done!';
     //      (although I don't know why you would)

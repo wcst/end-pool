@@ -48,10 +48,15 @@
    * @param  {Function} cb      Callback to apply upon completion
    * @return {[type]}           [description]
    */
-  EndPool.prototype.listenForEndOf = function (element, pool, cb) {
+  EndPool.prototype.listenForEndOf = function (element, pool, cb, ctxt) {
     
     var poolCount = 1, // Start at 1 and count up
-        end = this.endEvent, // Shorthand lookup of event name
+        
+        // Shorthand lookup of event name
+        end = this.endEvent,
+
+        // Set context of callback method
+        context = (typeof ctxt !== 'undefined') ? ctxt : element,
         
         // Local & private methods
         _handler,
@@ -64,7 +69,7 @@
      */
     _handler = function (evt) {
       poolCount++;
-      if (poolCount === pool) _afterAll();
+      if (poolCount >= pool) _afterAll();
     };
 
 
@@ -81,8 +86,8 @@
       element.removeEventListener(end, _handler);
       
       /**
-       * Ensure `cb` is a function and call it passing the
-       * `element` as the context, just like a native event
+       * Ensure `cb` is a function and invoke it in the
+       * previously cet context
        *
        * NOTE: The callback is executed on a delay to account for 
        * any mismatches in the transitionend triggers
@@ -90,7 +95,7 @@
        */
       if (typeof cb === 'function') {
         setTimeout(function () {
-          cb.call(element, null);
+          cb.call(context, null);
         }, 500);
       }
     };
@@ -109,10 +114,13 @@
    * @param  {Function} cb      Callback to apply upon completion
    * @return {[type]}         [description]
    */
-  EndPool.prototype.listenForEndOfAll = function (items, pool, cb) {
+  EndPool.prototype.listenForEndOfAll = function (items, pool, cb, ctxt) {
 
     // Count of items that have reported back as finished
     var itemsReported = 0,
+
+        context = (typeof ctxt !== undefined) ? ctxt : null,
+
         reportBack;
 
     /**
@@ -123,7 +131,7 @@
       itemsReported++;
       // Once all items have reported back, execute callback
       if (itemsReported === items.length)
-        if (typeof cb === 'function') cb.call();
+        if (typeof cb === 'function') cb.call(context, null);
     };
 
     /**
